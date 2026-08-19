@@ -2,6 +2,18 @@
 
 Consultas SQL do banco da loja NexaShop, todas no arquivo `consultas_nexashop.sql`.
 
+## Estrutura de pastas
+
+```
+.
+├── README.md                 este arquivo
+├── consultas_nexashop.sql    todas as consultas, na ordem dos exercicios
+└── resultados/               PDFs com a saida de cada consulta
+```
+
+A pasta `resultados/` tem um PDF por tarefa, nomeado pelo bloco e numero da
+tarefa (ex: `Bloco_2_Tarefa_2.1_Clientes_Ativos_Sul.pdf`).
+
 ## Padrao
 
 - Comentario numerado antes de cada consulta: `-- 1.1 - Primeiro contato com os dados`
