@@ -33,6 +33,40 @@ FROM pedidos;
 SELECT DISTINCT canal_venda
 FROM pedidos;
 
+-- 2.1 - Clientes ativos da regiao Sul
+SELECT nome, cidade, estado, status
+FROM clientes
+WHERE status = 'Ativo' AND estado IN ('SC', 'PR', 'RS')
+ORDER BY estado, nome;
+
+-- 2.2 - Busca de cliente por nome (tela de atendimento)
+SELECT nome, email, cidade, estado
+FROM clientes
+WHERE nome LIKE '%Silva%';
+
+-- 2.3 - Clientes sem telefone cadastrado
+SELECT nome, email, cidade, estado
+FROM clientes
+WHERE telefone IS NULL;
+
+-- 2.4 - Pedidos de ticket intermediario aprovados
+SELECT id, valor_total, forma_pagamento, canal_venda, status
+FROM pedidos
+WHERE status = 'Aprovado' AND valor_total BETWEEN 100 AND 500
+ORDER BY valor_total DESC;
+
+-- 2.5 - Alerta de reposicao de estoque
+SELECT nome, categoria, estoque
+FROM produtos
+WHERE ativo = 1 AND estoque < 10
+ORDER BY estoque ASC;
+
+-- 2.6 - Alcance das campanhas de cupom
+SELECT id, valor_total, cupom_desconto
+FROM pedidos
+WHERE cupom_desconto IS NOT NULL;
+
+
 -- 3.1 - Radar de ticket medio
 SELECT COUNT(*) AS qtde_pedidos, ROUND(AVG(valor_total), 2) AS ticket_medio, MIN(valor_total) AS menor_valor, MAX(valor_total) AS maior_valor
 FROM pedidos
@@ -69,40 +103,6 @@ FROM produtos
 WHERE ativo = 1
 GROUP BY categoria
 ORDER BY valor_em_estoque DESC;
-
--- 2.1 - Clientes ativos da regiao Sul
-SELECT nome, cidade, estado, status
-FROM clientes
-WHERE status = 'Ativo' AND estado IN ('SC', 'PR', 'RS')
-ORDER BY estado, nome;
-
--- 2.2 - Busca de cliente por nome (tela de atendimento)
-SELECT nome, email, cidade, estado
-FROM clientes
-WHERE nome LIKE '%Silva%';
-
--- 2.3 - Clientes sem telefone cadastrado
-SELECT nome, email, cidade, estado
-FROM clientes
-WHERE telefone IS NULL;
-
--- 2.4 - Pedidos de ticket intermediario aprovados
-SELECT id, valor_total, forma_pagamento, canal_venda, status
-FROM pedidos
-WHERE status = 'Aprovado' AND valor_total BETWEEN 100 AND 500
-ORDER BY valor_total DESC;
-
--- 2.5 - Alerta de reposicao de estoque
-SELECT nome, categoria, estoque
-FROM produtos
-WHERE ativo = 1 AND estoque < 10
-ORDER BY estoque ASC;
-
--- 2.6 - Alcance das campanhas de cupom
-SELECT id, valor_total, cupom_desconto
-FROM pedidos
-WHERE cupom_desconto IS NOT NULL;
-
 
 -- 4.1 - Classificando avaliacoes
 SELECT id, nota,
