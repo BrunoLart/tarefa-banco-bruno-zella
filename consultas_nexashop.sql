@@ -142,3 +142,26 @@ COUNT(*) AS qtde_clientes
 FROM clientes
 GROUP BY perfil_relacionamento
 ORDER BY qtde_clientes DESC;
+
+-- 5.1 - Ranking de canal de venda e forma de pagamento
+SELECT canal_venda, forma_pagamento, COUNT(*) AS qtde_pedidos, SUM(valor_total) AS faturamento
+FROM pedidos
+WHERE status = 'Aprovado'
+GROUP BY canal_venda, forma_pagamento
+HAVING COUNT(*) >= 200
+ORDER BY faturamento DESC
+LIMIT 5;
+
+-- 5.2 - Categorias "premium" do catalogo
+SELECT categoria, COUNT(*) AS qtde_produtos, ROUND(AVG(preco), 2) AS preco_medio
+FROM produtos
+WHERE ativo = 1
+GROUP BY categoria
+HAVING AVG(preco) > 300
+ORDER BY preco_medio DESC;
+
+-- 5.3 - Investigacao: o boleto cancela mais que os outros meios de pagamento?
+SELECT forma_pagamento, COUNT(*) AS total_pedidos, ROUND(AVG(CASE WHEN status = 'Cancelado' THEN 1 ELSE 0 END) * 100, 2) AS taxa_cancelamento_pct
+FROM pedidos
+GROUP BY forma_pagamento
+ORDER BY taxa_cancelamento_pct DESC;
