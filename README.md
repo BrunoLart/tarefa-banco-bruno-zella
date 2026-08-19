@@ -29,7 +29,3 @@ ORDER BY categoria;
 | `pedidos` | compras feitas, com pagamento e canal de venda |
 | `avaliacoes` | notas e comentarios dos clientes |
 
-## Como rodar
-
-Abra o arquivo no seu programa de banco (DBeaver, MySQL Workbench, DB Browser),
-selecione a consulta e execute.
