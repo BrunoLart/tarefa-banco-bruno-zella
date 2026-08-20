@@ -7,7 +7,6 @@ Consultas SQL do banco da loja NexaShop, todas no arquivo `consultas_nexashop.sq
 ```
 .
 ├── README.md                 este arquivo
-├── RELATORIO.md              relatorio da atividade, com as interpretacoes
 ├── consultas_nexashop.sql    todas as consultas, na ordem dos exercicios
 └── resultados/               PDFs com a saida de cada consulta
 ```
